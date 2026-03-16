@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menaxhues Notash dhe Provimesh</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>Menaxhues Notash dhe Provimesh</h1>
+      <p>Organizo lëndët, llogarit mesataren dhe menaxho provimet sipas listave.</p>
+    </header>
+
+    <div id="messageBox" class="message hidden"></div>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>Ngarko ose krijo një listë</h2>
+      </div>
+
+      <form id="loadForm">
+        <input
+          type="text"
+          id="listName"
+          placeholder="Emri i listës (p.sh. Semestri 1)"
+          required
+        />
+        <button type="submit" class="btn-primary">Ngarko / Krijo</button>
+      </form>
+
+      <div class="lists-header">
+        <h3>Listat ekzistuese</h3>
+        <button id="refreshListsBtn" type="button" class="btn-secondary">
+          Rifresko
+        </button>
+      </div>
+      <div id="savedLists" class="saved-lists empty-state">
+        Nuk ka lista të ruajtura ende.
+      </div>
+
+      <div id="jsonActions" class="json-actions hidden">
+        <form class="inline-form">
+          <input type="file" id="jsonFileInput" accept=".json" />
+          <button type="button" id="loadJsonBtn" class="btn-secondary">Ngarko JSON</button>
+          <button type="button" id="exportJsonBtn" class="btn-primary">Shkarko JSON</button>
+        </form>
+        <p class="small-note">
+          Mund të importosh ose eksportosh të dhënat e listës aktuale si JSON.
+        </p>
+      </div>
+    </section>
+
+    <section id="subjectsCard" class="card hidden">
+      <div class="section-title">
+        <h2>Lëndët</h2>
+        <span id="currentListBadge" class="badge">Lista: -</span>
+      </div>
+
+      <form id="subjectForm">
+        <input type="text" id="subjectName" placeholder="Emri i lëndës" required />
+        <input type="number" id="credits" placeholder="Kredite" min="1" required />
+        <input type="number" step="0.01" id="grade" placeholder="Nota (0-10)" min="0" max="10" required />
+        <button type="submit" id="submitBtn" class="btn-primary">Shto lëndë</button>
+        <button type="button" id="cancelEdit" class="btn-secondary hidden">Anulo</button>
+      </form>
+
+      <div class="table-wrapper">
+        <table id="subjectsTable" class="hidden">
+          <thead>
+            <tr>
+              <th>Emri i Lëndës</th>
+              <th>Kredite</th>
+              <th>Nota</th>
+              <th>Veprime</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div id="results" class="hidden">
+        <div class="stats">
+          <div class="stat-box">
+            <h4>Mesatarja e Ponderuar</h4>
+            <p id="average">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>GPA Gjermane</h4>
+            <p id="gpaGerman">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>Numri i Lëndëve</h4>
+            <p id="subjectCount">0</p>
+          </div>
+        </div>
+
+        <div class="danger-row">
+          <button id="clearAll" type="button" class="btn-danger">Fshij të gjitha lëndët</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="examsCard" class="card hidden">
+      <div class="section-title">
+        <h2>Provimet</h2>
+      </div>
+
+      <form id="examForm">
+        <input type="text" id="examSubject" placeholder="Emri i lëndës" required />
+        <input type="date" id="examDate" required />
+        <input type="time" id="examTime" />
+        <input type="text" id="examNotes" placeholder="Shënime (opsionale)" />
+        <button type="submit" class="btn-primary">Shto provim</button>
+      </form>
+
+      <div class="table-wrapper">
+        <table id="examTable" class="hidden">
+          <thead>
+            <tr>
+              <th>Lënda</th>
+              <th>Data</th>
+              <th>Ora</th>
+              <th>Shënime</th>
+              <th>Statusi</th>
+              <th>Veprime</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
