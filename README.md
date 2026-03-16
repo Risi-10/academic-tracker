@@ -82,7 +82,7 @@
 
 # 
 
-# !\[Project screenshot](screenshot.png)
+# ![Project screenshot](screenshot.png)
 
 # 
 
